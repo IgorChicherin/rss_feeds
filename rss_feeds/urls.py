@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 
-from rss_agregator.views import FeedsListView
+from rss_agregator.views import FeedsListView, LastFiftyFeedsListView
 
 
 urlpatterns = [
     url(r'^$', FeedsListView.as_view()),
     path('admin/', admin.site.urls),
-    url(r'^feeds/', include('rss_crud.urls'))
-
+    url(r'^feeds/', include('rss_crud.urls')),
+    url(r'^last-50-feeds/$', LastFiftyFeedsListView.as_view())
 ]
