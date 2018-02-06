@@ -17,6 +17,12 @@ class NewsItemForm(forms.ModelForm):
 class RssLinkForm(forms.ModelForm):
     rss_link = forms.URLField()
 
+    class Meta:
+        model = RssLinks
+        fields = ('rss_link',)
+
+class RssLinkParseForm(RssLinkForm):
+
     def save(self, commit=True):
         instance = super(RssLinkForm, self).save()
         request = requests.get(instance.rss_link)
@@ -25,8 +31,3 @@ class RssLinkForm(forms.ModelForm):
             news_item = NewsItems(title=feed['title'], description=feed['description'], rss_link=instance)
             news_item.save()
         return instance
-
-    class Meta:
-        model = RssLinks
-        fields = ('rss_link',)
-
