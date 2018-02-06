@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form action="/create/" method="post">
-        {% csrf_token %}
-        {{ .as_table }}
+    <form action="/feeds/create/" method="post">
+        {% include 'inc-rss-add.html' %}
     </form>
-
-
 {%  endblock %}

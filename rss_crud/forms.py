@@ -19,17 +19,14 @@ class RssLinkForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(RssLinkForm, self).save()
-        request = requests.get(self.rss_link)
+        request = requests.get(instance.rss_link)
         news_feeds = feedparser.parse(request.text)
         for feed in news_feeds['entries']:
-            news_item = NewsItems(title=feed['title'], description=feed['description'])
+            news_item = NewsItems(title=feed['title'], description=feed['description'], rss_link=instance)
             news_item.save()
-            RssLinks.objects.create(
-                rss_link=feed['link'],
-                news_link_id=news_item.id
-            )
         return instance
 
     class Meta:
         model = RssLinks
-        fields = '__all__'
+        fields = ('rss_link',)
+

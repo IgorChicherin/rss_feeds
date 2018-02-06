@@ -10,9 +10,9 @@ from .forms import RssLinkForm
 
 class RssLinksCreateView(CreateView):
     model = RssLinks
-    context_object_name = 'rss_links'
     form_class = RssLinkForm
     template_name = 'crud.html'
+    success_url = '/feeds/'
 
 
 class RssLinksView(ListView):

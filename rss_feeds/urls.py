@@ -23,6 +23,6 @@ from rss_agregator.views import FeedsListView
 urlpatterns = [
     url(r'^$', FeedsListView.as_view()),
     path('admin/', admin.site.urls),
-    url(r'^feeds/$', include('rss_crud.urls'))
+    url(r'^feeds/', include('rss_crud.urls'))
 
 ]
