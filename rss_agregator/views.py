@@ -10,3 +10,6 @@ class FeedsListView(ListView):
     model = NewsItems
     context_object_name = 'news_items'
     template_name = 'index.html'
+
+    def get_queryset(self):
+        return NewsItems.objects.all().order_by('-date')
