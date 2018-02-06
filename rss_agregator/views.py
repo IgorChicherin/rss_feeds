@@ -8,5 +8,5 @@ from rss_crud.models import NewsItems, RssLinks
 
 class FeedsListView(ListView):
     model = NewsItems
-    context_object_name = 'news'
+    context_object_name = 'news_items'
     template_name = 'index.html'
