@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
+{% block nav %}
+    <div class="feed_link_add">
+        <form action="/feeds/create/" method="post">
+            {% include 'inc-rss-add.html' %}
+        </form>
+    </div>
+{% endblock %}
 {% block content %}
-    <form action="/feeds/create/" method="post">
-        {% include 'inc-rss-add.html' %}
-    </form>
+    <div class="content">
+        {% if rss_links %}
+             {% for link in rss_links %}
+            <div class="alert alert-secondary" role="alert">
+                <h4 class="alert-heading">Rss feed link</h4>
+                <p>{{ link.rss_link }}</p>
+                <div class="buttons-group">
+                    <a href="update/{{ link.id }}" class="btn btn-primary">Edit</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    {% include 'delete-rss-confirm.html' %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">No rss feeds!</h4>
+                <p>Please, add feed link</p>
+        {% endif %}
+    </div>
 {%  endblock %}
