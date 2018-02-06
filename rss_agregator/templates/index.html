@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {%  block content %}
      <div class="ccontent">
-         {% for feed in news_items %}
-            <div class="alert alert-secondary" role="alert">
-                <h4 class="alert-heading">{{ feed.title }}</h4>
-                <p>{{ feed.description }}</p>
-            </div>
-        {% endfor %}
+        {% if news_items %}
+            {% for feed in news_items %}
+                <div class="alert alert-secondary" role="alert">
+                    <h4 class="alert-heading">{{ feed.title }}</h4>
+                    <p>{{ feed.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-danger" role="alert" style="margin: 20px">
+                <h4 class="alert-heading">No rss feeds!</h4>
+                <p>Please, add feed link</p>
+        {% endif %}
     </div>
 {% endblock %}
