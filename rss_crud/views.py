@@ -1,18 +1,16 @@
-from django.shortcuts import render
+from django.views.generic import UpdateView, ListView, CreateView, DeleteView
 
-from django.views.generic import UpdateView, ListView, CreateView
-
+from .forms import RssLinkForm, RssLinkParseForm
 from .models import RssLinks
-from .forms import RssLinkForm
 
 
 # Create your views here.
 
 class RssLinksCreateView(CreateView):
     model = RssLinks
-    form_class = RssLinkForm
+    form_class = RssLinkParseForm
     template_name = 'crud.html'
-    success_url = '/feeds/'
+    success_url = '/'
 
 
 class RssLinksView(ListView):
@@ -20,9 +18,20 @@ class RssLinksView(ListView):
     context_object_name = 'rss_links'
     template_name = 'crud.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = RssLinkParseForm()
+        return context
+
 
 class RssLinksUpdateView(UpdateView):
     model = RssLinks
     form_class = RssLinkForm
-    context_object_name = 'rss_links'
-    template_name = 'crud.html'
+    template_name = 'edit-rss.html'
+    success_url = '/feeds/'
+
+
+class RssLinksDeleteView(DeleteView):
+    model = RssLinks
+    template_name = 'delete-rss-confirm.html'
+    success_url = '/feeds/'
