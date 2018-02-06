@@ -1,8 +1,20 @@
-.ccontent {
+.content {
     margin: 20px;
 }
 
 .buttons-group{
     position: inherit;
     left: 90%;
+}
+
+.feed_link_add{
+    left: 87%;
+}
+
+#id_rss_link{
+    width: 24.5vw;
+}
+
+#navbarSupportedContent > ul > div > form > input.btn.btn-primary{
+    height: 33px;
 }
